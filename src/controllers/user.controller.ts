@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 
-import { createUserService } from "../services/create-user.service";
-import { findUserService } from "../services/find-user.service";
-import { allUsersService } from "../services/find-users.service";
+import { createUserService } from "../services/user/create.service";
+import { findAllService } from "../services/user/find-all.service";
+import { findOneService } from "../services/user/find-one.service";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
-    const users = await allUsersService();
+    const users = await findAllService();
 
     if (!users) {
       return res.status(404).json({ message: "Nenhum usuário não encontrado" });
@@ -21,7 +21,7 @@ export const getUsers = async (req: Request, res: Response) => {
 export const getUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const user = await findUserService(Number(id));
+    const user = await findOneService(Number(id));
 
     if (!user) {
       return res.status(404).json({ message: "Usuário não encontrado" });

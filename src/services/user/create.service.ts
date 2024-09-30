@@ -11,6 +11,7 @@ type CreateUserProps = {
 
 export const createUserService = async (user: CreateUserProps) => {
   const { name, email, password } = user;
+
   const userExists = await prisma.user.findUnique({
     where: { email },
   });
