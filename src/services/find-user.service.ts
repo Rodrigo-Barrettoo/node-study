@@ -1,5 +1,11 @@
-import { users } from "../controllers/user.controller";
+import { PrismaClient } from "@prisma/client";
 
-export default (id: number) => {
-  return users.find((user) => user.id === id);
+const prisma = new PrismaClient();
+
+export const findUserService = async (id: number) => {
+  const user = await prisma.user.findUnique({
+    where: { id },
+  });
+
+  return user;
 };
