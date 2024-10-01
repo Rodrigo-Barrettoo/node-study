@@ -1,9 +1,15 @@
 import { Router } from "express";
-import { getLinks } from "../controllers/link.controller";
+import {
+  createLink,
+  deleteLink,
+  getLinks,
+  redirectLink,
+} from "../controllers/link.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
 
 export const linkRouter = Router();
 
+linkRouter.get("/:shortUrl", redirectLink);
 linkRouter.get("/", authMiddleware, getLinks);
-linkRouter.get("/:id");
-linkRouter.get("/:id");
+linkRouter.post("/new", authMiddleware, createLink);
+linkRouter.delete("/:id", authMiddleware, deleteLink);

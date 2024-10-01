@@ -28,7 +28,7 @@ export const authentication = async (userAuth: AuthUserProps) => {
   }
 
   const token = jwt.sign(
-    { user: { email: user.email, name: user.name } },
+    { user: { email: user.email, id: user.id } },
     env.JWT_SECRET,
     { expiresIn: "1h" }
   );
